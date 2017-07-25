@@ -17,12 +17,20 @@
                                     <h3>{{product.name}}</h3>
                                     <h3>{{product.description}}</h3>
                                     <h3>{{product.price | currency}}</h3>
+
                                     <button class="button button-positive button-small" ng-hide="home.addedToCart"
-                                            ng-click="home.addToCart(product, $event)">Add to Cart
-                                    </button>
+                                            ng-click="home.addToCart(product, $event)">&nbsp;Add to Cart&nbsp;</button>
+
                                     <button class="button button-balanced button-small" ng-show="home.addedToCart">
-                                        <i class="icon ion-checkmark-round"></i>Product Added
-                                    </button>
+                                        <i class="icon ion-checkmark-round"></i>Product Added</button>
+
+                                    <button class="button button-positive button-small favorite"
+                                            ng-hide="!logged_in || product.addedToFavorites"
+                                            ng-click="home.addToFavorites(product, $event)">Favorite Item</button>
+
+                                    <button class="button button-balanced button-small favorite"
+                                            ng-show="logged_in && product.addedToFavorites">
+                                        <i class="icon ion-checkmark-round"></i>Product Added</button>
                                 </div>
                             </div>
                         </div>

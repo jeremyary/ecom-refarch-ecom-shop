@@ -34,4 +34,12 @@
     <ion-nav-view name="tab-account"></ion-nav-view>
     </ion-tab>
 
+    <ion-tab ng-if="logged_in"
+            title="Favorites"
+            icon-off="ion-ios7-heart-outline"
+            icon-on="ion-ios7-heart"
+            href="/tab/favorites">
+        <ion-nav-view name="tab-favorites"></ion-nav-view>
+    </ion-tab>
+
 </ion-tabs>

@@ -33,8 +33,8 @@ function ($q, $fh, $rootScope) {
 
     var logout = function() {
 
+        var defer = $q.defer();
         if ($rootScope.user) {
-            var defer = $q.defer();
             var params = {
                 path: '/cloud/customers/' + $rootScope.user.id + '/logout',
                 method: "POST",

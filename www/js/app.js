@@ -14,13 +14,16 @@ var myApp = angular.module('myApp',
     ])
 
     .constant('$fh', require("fh-js-sdk"))
+    .constant('moment', require("moment"))
 
     .constant('$ionicLoadingConfig', {
         template: '<ion-spinner></ion-spinner>',
         noBackdrop: false
     })
 
-    .run(function($rootScope, $interval, AuthService, SalesService) {
+    .run(function($rootScope, $interval, AuthService, SalesService, SyncService) {
+
+        SyncService.init();
 
         $rootScope.user = null;
         $rootScope.logged_in = false;
@@ -42,6 +45,10 @@ var myApp = angular.module('myApp',
         $rootScope.$on('event.userPart', function(event, user) {
             $rootScope.user = null;
             $rootScope.logged_in = false;
+        });
+
+        AuthService.login("bobdole", "password").then(function(data) {
+            $rootScope.$emit("event.userAuth", data);
         });
 
         $interval(function() {
@@ -138,6 +145,18 @@ var myApp = angular.module('myApp',
                             controller: 'OrderDetailCtrl as order'
                         }
                     }
+                })
+
+                .state('tab.favorites', {
+                    cache: false,
+                    url: '/favorites',
+                    views: {
+                        'tab-favorites': {
+                            templateUrl: 'templates/favorites.html',
+                            controller: 'FavoritesCtrl as favorites'
+                        }
+                    }
                 });
+
             $urlRouterProvider.otherwise('/tab/home');
         });

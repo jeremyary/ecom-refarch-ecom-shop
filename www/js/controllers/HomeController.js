@@ -1,11 +1,15 @@
 angular.module('myApp').controller('HomeCtrl',
-        ['$scope', '$rootScope', '$q', '$state', '$ionicLoading', '$ionicPopup', '$ionicSlideBoxDelegate', '$timeout', 'ProductService', 'CartService', 'AuthService',
-function ($scope, $rootScope, $q, $state, $ionicLoading, $ionicPopup, $ionicSlideBoxDelegate, $timeout, ProductService, CartService, AuthService) {
+        ['$scope', '$rootScope', '$state', '$ionicLoading', '$ionicPopup', '$ionicSlideBoxDelegate', '$timeout', 'ProductService', 'CartService', 'AuthService', 'SyncService',
+function ($scope, $rootScope, $state, $ionicLoading, $ionicPopup, $ionicSlideBoxDelegate, $timeout, ProductService, CartService, AuthService, SyncService) {
 
     var instance = this;
 
     instance.show_featured = false;
     instance.addedToCart = false;
+
+    $rootScope.$on('sync', function(event, list) {
+       instance.list = list;
+    });
 
     $scope.$on('$ionicView.enter', function (e) {
 
@@ -49,8 +53,14 @@ function ($scope, $rootScope, $q, $state, $ionicLoading, $ionicPopup, $ionicSlid
     }
     instance.addToCart = addToCart;
 
-    function isAuthenticated() {
-        return AuthService.isAuthenticated();
+    function addToFavorites(product, $event) {
+
+        $event.stopPropagation();
+        SyncService.save(product);
+        product.addedToFavorites = true;
+        $timeout(function () {
+            product.addedToFavorites = false;
+        }, 700);
     }
-    instance.isAuthenticated = isAuthenticated;
+    instance.addToFavorites = addToFavorites;
 }]);

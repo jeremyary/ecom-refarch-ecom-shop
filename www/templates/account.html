@@ -69,7 +69,7 @@
         <ion-list>
             <h4 class="cart empty" ng-show="user.orders.length === 0">No Orders Found</h4>
             <h5 class="cart empty" ng-show="user.orders.length > 0">Recent Orders
-                <span ng-show="user.orders.length > 4"> (showing 5 of {{user.orders.length}})</span>:</h5>
+                <span ng-show="user.orders.length > 5"> (showing 5 of {{user.orders.length}})</span>:</h5>
             <ion-item ng-show="user.orders.length > 0"
                     class="item-icon-right"
                     ng-repeat="order in user.orders | orderBy: '-transactionDate' | limitTo: 5"
@@ -81,7 +81,7 @@
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>
         </ion-list>
-        <ion-footer-bar class="bar bar-clear product-details" id="products-detail-footer">
+        <ion-footer-bar class="bar bar-clear product-details" id="account-detail-footer">
             <button class="button button-block button-positive"
                     ng-click="account.logout()">
                 Log out

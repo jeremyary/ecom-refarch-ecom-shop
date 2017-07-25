@@ -11,9 +11,6 @@ function ($scope, $state, $ionicLoading, $ionicPopup, AuthService, ProductServic
         ProductService.list()
             .then(function (data) {
                     instance.all = data;
-                    for (var key in instance.all) {
-                        var product = instance.all[key];
-                    }
                     $ionicLoading.hide();
                 },
                 function (data) {
@@ -31,8 +28,8 @@ function ($scope, $state, $ionicLoading, $ionicPopup, AuthService, ProductServic
 }]);
 
 angular.module('myApp').controller('ProductDetailCtrl',
-        ['$scope', '$stateParams', '$state', '$ionicLoading', '$ionicPopup', '$timeout', 'AuthService', 'ProductService', 'CartService',
-function ($scope, $stateParams, $state, $ionicLoading, $ionicPopup, $timeout, AuthService, ProductService, CartService) {
+        ['$scope', '$stateParams', '$state', '$ionicLoading', '$ionicPopup', '$timeout', 'AuthService', 'ProductService', 'CartService', 'SyncService',
+function ($scope, $stateParams, $state, $ionicLoading, $ionicPopup, $timeout, AuthService, ProductService, CartService, SyncService) {
 
     var instance = this;
     $scope.$on('$ionicView.enter', function (e) {
@@ -71,4 +68,14 @@ function ($scope, $stateParams, $state, $ionicLoading, $ionicPopup, $timeout, Au
         }, 700);
     }
     instance.addToCart = addToCart;
+
+    function addToFavorites(product) {
+
+        SyncService.save(product);
+        product.addedToFavorites = true;
+        $timeout(function () {
+            product.addedToFavorites = false;
+        }, 700);
+    }
+    instance.addToFavorites = addToFavorites;
 }]);
