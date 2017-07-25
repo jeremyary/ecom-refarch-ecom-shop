@@ -1,7 +1,8 @@
 {
-  "host": "<host>",
-  "appid": "<appid>",
-  "projectid": "<projectid>",
-  "appkey": "<appkey>",
-  "connectiontag": "<connectiontag>"
+  "appid": "h6sw4syh77aqkswb6qt4x6zu",
+  "appkey": "ec8de7a8bf0e7d7de4fa2f984461c25c4d184ea9",
+  "apptitle": "ecom-shop",
+  "connectiontag": "0.0.1",
+  "host": "http://app.rhmap.ocp.cloud.lab.eng.bos.redhat.com",
+  "projectid": "h6sw4s76glcnfu5j3tunz26i"
 }

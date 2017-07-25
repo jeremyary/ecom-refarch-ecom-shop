@@ -4,6 +4,7 @@
 .settings
 *~
 .sass-cache
+*.iml
  
 # Mac
 .DS_Store
